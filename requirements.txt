@@ -1,0 +1,16 @@
+pydantic
+# pymongo
+python-dotenv
+# docker
+requests
+# pytz # timezone
+
+fastapi
+uvicorn[standard]
+# redis
+
+# # FastAPI form data
+# python-multipart
+
+# data
+pandas
