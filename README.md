@@ -28,10 +28,11 @@ Copy the `*.env.template` files to  `*.env` files and fill out the fields
 
 ### Run
 ```
-uvicorn main:app \
-    --reload        # reload changes on save, disable in final deployment
-    --host 0.0.0.0  # to make it public
-    --port 1234     # may need to use port 80 for http in final, or docker map port
+# --reload changes on save, disable in final deployment
+# 0.0.0.0 to make it public
+# may need to use port 80 for http in final, or docker map port
+
+uvicorn main:app --reload --host 0.0.0.0 --port 1234
 ```
 
 #### Side note on `.env` loading (Skip if you know how they work)
