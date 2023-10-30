@@ -1,0 +1,118 @@
+Alex Lawrence is the CEO and cofounder of an all-electric used car dealership in Utah.
+He says today's car-buying process gets it all wrong.
+Here's his advice for car buyers shopping electric, as told to reporter Alexa St. John.
+Alex Lawrence is a 49-year-old entrepreneur and the CEO of EVAuto, an all-electric used car dealership in Bountiful, Utah, which he co-founded in 2019. The business now has anywhere from 25 to 45 cars on the lot at any given time, he said.
+
+The interview has been edited for length and clarity.
+
+My first business was car detailing. I went door to door in wealthy neighborhoods near where I lived and asked if I could detail their car. Cars have always been a huge interest of mine. I put every possible dollar into my first car.
+I was also always an early adopter of gadgets, software, and hardware. I spent the first half of my career in food franchising. Along the way, I was involved in starting and launching and being a part of some really cool tech startups. I also started teaching as an adjunct every once in a while, got an MBA, and then joined to start an entrepreneurship program. I decided to get a PhD, and then got the startup itch.
+
+1 / 17
+
+These are the hardest and easiest EVs to find at dealerships right now
+
+1
+These are the hardest and easiest EVs to find at dealerships right now
+©Ford
+Some electric vehicles are flying off dealer lots, while others have been harder to sell.
+Cloud Theory tracks car make and model data and dealership inventory.
+Here's which EVs might be easiest to get your hands on right now, and which are trickier to find.  
+Some electric cars are flying off dealer lots, while others have been harder to sell.
+
+That's according to data from Cloud Theory, a data analytics firm that tracks dealership inventory across the US.
+
+As automakers ramp up production of electric vehicles, some are having a harder time getting them off dealership lots than they did a year ago, Cloud Theory found. 
+
+For example, while Hyundai has more than doubled the number of Ioniq 5 EVs in dealership inventory from 2022 to 2023, the turn rate (or the number of these cars that leave dealer lots within a 30 day period) has declined. Last year, about 82% of Ioniq 5's left lots within 30 days, but this year, only 37% have, according to Cloud Theory.
+
+Volkswagen, which has about four times as much inventory of the ID.4 on average in a given month this year than in 2022, was selling all of its ID.4 inventory within a month last year. This year, about 70% of ID.4's leave dealer lots in that time.
+
+The sale pace for Ford's Mustang Mach-E fell from 95% sold within 30 days last year to 64% selling in that period this year.
+
+Why this is the case
+A year ago, car companies were churning out fewer EVs, creating a perception of scarcity and sparking a bit of a supply-and-demand rush. Customers interested in going electric snatched the only Mustang Mach-E or other EVs they saw on the lot. High gas prices had even EV-curious customers taking the plunge.
+
+Fast forward to this year, and production is getting closer to full swing, meaning more of these cars are available. At the same time, more automakers are launching product — spreading the wealth in terms of customer purchases. And the broader economic environment, coupled with sky-high interest rates, has a lot of prospective buyers holding off on making a substantial purchase.
+
+"Vehicle movement — the way that we capture sales — is growing," Rick Wainschel, industry analyst and Cloud Theory VP of data science and analytics, told Insider. "But it's not nearly keeping pace with the rate of inventory growth. You've got pressure on those manufacturers that are selling those vehicles and introducing new ones and adding production to the existing ones all at the same time, all by the way, while Tesla is the 800-pound gorilla in the space."
+
+"A year ago, the overall inventory situation in the marketplace was very challenged," he added. Now, "There's this glut of new models to choose from for consumers, and it got diluted when you look at the turn rates across all of those manufacturers all doing that at the same time."
+
+Cloud Theory's numbers indicate which EVs might be easiest to find right now, and which might still be in short supply. To gather the data, Cloud Theory indexes dealership inventory via their websites, as well as collects diagnostic information like how long a vehicle was on their site. Cloud Theory does not get data for Tesla as the company does not sell through a traditional dealership model.
+
+"The train is going down the tracks" with electrification collectively, Wainschel said, but for individual automakers with an EV to sell, it's a lot harder.
+
+Here's a look at some of the easiest-to-find and hardest-to-find electric cars for many of the EVs that saw inventory availability increase from last year to this year. 
+
+
+See more
+My cofounder and I were talking, and he said 'it's such a pain to buy or sell a used Tesla'
+You have to go to a bunch of different places, you have to deal with a bunch of different salespeople, probably have a bunch of different bad experiences. It takes a lot of time.
+
+So in 2019, we acquired evcars.com and evtrucks.com with the intention to build a marketplace for other people to buy and sell used electric vehicles.
+
+EVAuto sells a variety of electric cars, from Tesla to Porsche to Rivian. EVAuto
+EVAuto sells a variety of electric cars, from Tesla to Porsche to Rivian. EVAuto
+© EVAuto
+To car buyers, only a handful of things matter
+It's the self-driving status, the colors, the wheels, how far the battery will go on a charge, and that's about it.
+
+Even to this day, for the vast majority of listing sites, it's really painful to look for those things, and in some cases, you can't even find them.
+
+Our business model is that it's free to private sellers and dealers pay a monthly subscription. My cofounder also dusted off his dealer's license. Eventually, I bought a used Tesla from an auto auction, shipped it here, and listed it on the site, sold it, bought another car, and sold it. We're still building the marketplace too.
+
+EVAuto only sells EVs. EVAuto
+EVAuto only sells EVs. EVAuto
+© EVAuto
+Nearly two years ago, we made a decision to really put some weight behind it. We wanted to be the largest seller of used electric vehicles in America. We bought a new piece of ground.
+
+EVs are disrupting the car business
+We're trying to disrupt the car-buying experience. Not by using the internet, but by creating a much better in-person experience. Having not been a car dealer until now, I know how terrible it is to buy a car. It's miserable. It's one of the worst buying experiences people have in their life, and it's the second biggest expense ever in their life.
+
+Price cuts are one of the things that's really challenging about EVs and why a lot of dealers try to stay away from them.
+
+We're different because we operate debt-free. I don't have to have cars and I don't have a traditional floorplan or interest payments. So if I don't have a bunch of cars right now, we might not make much money, we might even lose a little bit, but I'm not sitting on inventory that's overpriced.
+
+There are flags to look out for at the dealership
+All the tricks that I've learned dealers can do to customers: Pressure you, get you to buy add-ons, and make it take a long time unnecessarily.
+
+We'll do the little things to make it a Nordstrom white-glove experience. The majority of car dealerships don't do them well, some by design and some just because they've been around forever and it's hard to change.
+
+The vast majority of our customers have a million questions, and they're first-time EV buyers
+Range anxiety, charging issues: How do I charge it? Where do I charge it? When can I charge it? How far can I drive it? How long is the battery going to last? How much is it going to cost me for a new battery? When am I going to have to replace this?
+
+They're very valid. For some people, it means certain cars aren't the right fit for them. We start asking them questions about their driving lifestyle. My whole household's been driving exclusively electric for four years now.
+
+A tourist in Italy said he faced some difficulties with charging his EV rental when he vacationed there. Lorenzo Di Cola/NurPhoto via Getty Images
+A tourist in Italy said he faced some difficulties with charging his EV rental when he vacationed there. Lorenzo Di Cola/NurPhoto via Getty Images
+© Lorenzo Di Cola/NurPhoto via Getty Images
+You're never going to need a charging station unless you're on a trip
+We can put a charger in your garage and you're going to wake up every morning with 300, 280, 250, however many miles, and virtually nobody drives that much in a day. By the way, there are Superchargers, etcetera, all around you.
+
+When they say, 'What about trips?' I ask where they go, and here in Utah, it's a lot of the same locations. If you leave with a full charge, you'll stop at one of the Superchargers between here and there for about 20 minutes.
+
+It's not two minutes like gas, but you'll get a drink, go to the bathroom, check your phone, and you're out of there.
+
+A variety of EVs are popular with buyers, but especially Teslas given their market share
+Within Teslas, Model Ys and Model 3s, plus Rivians are really popular. We've had some good luck with the Ford Lightnings. We're starting to see certain Audis, and BMWs.
+
+Not as much the Hyundais, Kias, Mach-Es, or Chevrolet Bolts. I think those are going to become more popular with the new tax changes happening in January, where you can use the credit as a down payment. That will make the lower-priced ones appealing to more people.
+
+We only do clean title, really clean Carfax, nice cars, and we buy them without damage.
+
+Find somebody that really knows about EVs and is totally immersed to help you make the best decision
+Tesla is the right option for many people, even most, but it's not for everyone — and even then there's a broad range of different Teslas.
+
+Beyond that, I really think that actually driving them is important.
+
+The GMC Hummer EV Edition 1. Tim Levin/Insider
+The GMC Hummer EV Edition 1. Tim Levin/Insider
+© Tim Levin/Insider
+We're wrapping a Model S Plaid, so that will be my daily driver for marketing, but I'll drive anything from our lot
+
+I think the Hummer EV is awesome. They're not practical, but they're so fun.
+
+I'm really impressed with the Rivian R1S. It's my favorite-looking SUV. The build quality is really high. They're really cool looking. Now that they're going to be on the Supercharger network, that helps solve the charging problem.
+
+My favorite-looking sedan is the Porsche Taycan.

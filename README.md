@@ -1,6 +1,13 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/ZEqMxGpP)
 
 
+# This is a experiment demo branch
+Do NOT develop from this branch or try to merge!
+
+Look at the `server/test_data/` folder, for the web text, the response from GPT API.
+
+The prompt engineering part is in `server/llm_completion.py`
+
 
 # Server / API part
 

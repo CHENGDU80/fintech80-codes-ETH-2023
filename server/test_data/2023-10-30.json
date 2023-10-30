@@ -1,0 +1,44 @@
+[
+    {
+        "name": "I'm a car dealer who only sells electric cars. This is what everyone else is getting wrong \u2014 and the advice I give prospective EV buyers.",
+        "url": "https://www.msn.com/en-us/autos/news/im-a-car-dealer-who-only-sells-electric-cars-this-is-what-everyone-else-is-getting-wrong-and-the-advice-i-give-prospective-ev-buyers/ar-AA1j2aWT",
+        "image": {
+            "thumbnail": {
+                "contentUrl": "https://www.bing.com/th?id=OVFT.SWdIS5C5N3yYYgsE2t39Fi&pid=News",
+                "width": 700,
+                "height": 350
+            }
+        },
+        "description": "Alex Lawrence cofounded EVAuto as a place for buying and selling used EVs. He's looking to disrupt traditional car buying, but not in the way you would think.",
+        "about": [
+            {
+                "readLink": "https://api.bing.microsoft.com/api/v7/entities/4b479ed2-a365-cdb8-9bf2-988def9bbd10",
+                "name": "Sells"
+            }
+        ],
+        "mentions": [
+            {
+                "name": "Sells"
+            },
+            {
+                "name": "Car dealership"
+            },
+            {
+                "name": "Electric vehicle"
+            }
+        ],
+        "provider": [
+            {
+                "_type": "Organization",
+                "name": "Business Insider on MSN.com",
+                "image": {
+                    "thumbnail": {
+                        "contentUrl": "https://www.bing.com/th?id=ODF.q-ZVWyz-qFnnPRsNgOLlfQ&pid=news"
+                    }
+                }
+            }
+        ],
+        "datePublished": "2023-10-29T09:57:01.0000000Z",
+        "category": "ScienceAndTechnology"
+    }
+]

@@ -17,3 +17,6 @@ pandas
 
 # openai/GPT API
 openai
+
+# web proc
+beautifulsoup4
