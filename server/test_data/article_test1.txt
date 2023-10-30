@@ -1,0 +1,29 @@
+
+archive.ph
+Tesla (TSLA) Faces Self-Driving Challenge as Geely and Baidu Launch E…
+Linda Lew
+3–4 minutes
+
+Competition is intensifying in China’s automated-driving scene with the arrival of Jiyue 01, the first electric vehicle from a joint venture between Zhejiang Geely Holding Group Co. and Chinese search and tech giant Baidu Inc.
+
+Launching Friday, the sport-utility vehicle is equipped with Baidu’s Apollo platform, which has been in development for 10 years and used on driverless vehicles since 2016. While the Jiyue 01 still deploys a high-precision map for assisted driving, it is moving toward the pure-vision approach, which mostly uses cameras to assess the surrounding environment. Tesla similarly eschews more costly Lidars and ultrasonic radars.
+
+“Tesla is a pioneer in the intelligent car and a leader in global sales,” Luo Gang, chief operating officer of the Geely-Baidu Jiyue venture, told reporters at a briefing. “But from the perspective of handling and user interface, I think we’d win. Compared with the Model Y, which is the closest to our car, from the space, design, interiors, I personally think the Jiyue 01 is better.”
+
+China is the world’s biggest EV market and dozens of brands are looking to stand out with new technologies. While Tesla’s Model Y is one of the top-selling EVs, the system it markets as Full Self-Driving isn’t available in the country.
+
+Other rivals include Xpeng Inc. and Huawei Technologies Co., which have also developed sophisticated automated-driving systems that enable vehicles to navigate independently and park themselves.
+Safety Concerns
+
+Chinese law hasn’t yet defined whether the driver or the assisted-driving system would take legal responsibility in the event of an accident. Most manufacturers are taking a cautious approach and sticking with Level 2 technology, where a vehicle can steer, accelerate or brake, but a human still sits behind the steering wheel and is responsible for controls at all times.
+
+Tesla faces multiple lawsuits over its Autopilot function, while General Motors Co.’s driverless-taxi unit Cruise has just shelved operations after its license was suspended in California in relation to an accident involving a pedestrian.
+Interiors of the Jiyue 01.Source: Jiyue
+
+The Jiyue 01 has a range of as much as 720 kilometers (450 miles) using a battery from Contemporary Amperex Technology Co. Ltd., the world’s biggest cell maker. The SUV will be priced from 249,900 yuan ($34,150), slightly below Huawei’s Aito M5, which starts at 259,800 yuan. Tesla’s Model Y and Xpeng’s G9 SUV are slightly more expensive, starting at 263,900 yuan.
+
+The Jiyue 01 can process voice commands for functions including opening the windows or playing video. The service also works without an Internet connection, Luo said.
+
+Jiyue 01’s journey to market was delayed as Beijing tightened issuance of EV production licenses. After initially providing subsidies and fueling breakneck growth in the industry, the government reined in support and limited the number of new entrants.
+
+To start selling its new SUV, Geely, which has a manufacturing permit, set up the Jiyue joint venture in August, holding a majority stake. Baidu has 35%.

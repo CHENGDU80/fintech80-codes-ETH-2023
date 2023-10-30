@@ -1,0 +1,20 @@
+{
+  "policy": 0,
+  "cash flow": 0,
+  "interest rate": 0,
+  "tech innovation": 75,
+  "industry": [
+    ["Automotive", 0.75],
+    ["Technology", 0.75]
+  ],
+  "company": [
+    ["Tesla", 0.75],
+    ["Geely Holding Group", 0.5],
+    ["Baidu Inc.", 0.5]
+  ],
+  "commodities": [
+    ["Copper", 0.5],
+    ["Lithium", 0.5]
+  ],
+  "summary": "Competition in China's automated-driving scene intensifies with Geely and Baidu's joint venture Jiyue 01, boosting tech innovation and benefiting Tesla, Geely, and Baidu."
+}

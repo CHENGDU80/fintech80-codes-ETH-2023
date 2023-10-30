@@ -1,0 +1,142 @@
+{
+    "_type": "News",
+    "readLink": "https://api.bing.microsoft.com/api/v7/news/search?q=%22electric+vehicle%22+OR+%22BYD%22+OR+%22Tesla%22+EV+Market%2c+Policy+%26+InvestmentEV+Battery+Summit+Sustainable+EV+Supply+Chain+EV+Manufacturing+Next+Generation+Vehicle+Design+Advanced+Driver+Assistance+System+EV+Charging+Infra+site%3awww.bloomberg.com",
+    "queryContext": {
+        "originalQuery": "\"electric vehicle\" OR \"BYD\" OR \"Tesla\" EV Market, Policy & InvestmentEV Battery Summit Sustainable EV Supply Chain EV Manufacturing Next Generation Vehicle Design Advanced Driver Assistance System EV Charging Infra site:www.bloomberg.com",
+        "adultIntent": false
+    },
+    "totalEstimatedMatches": 55700,
+    "sort": [
+        {
+            "name": "Best match",
+            "id": "relevance",
+            "isSelected": true,
+            "url": "https://api.bing.microsoft.com/api/v7/news/search?q=%22electric+vehicle%22+OR+%22BYD%22+OR+%22Tesla%22+EV+Market%2c+Policy+%26+InvestmentEV+Battery+Summit+Sustainable+EV+Supply+Chain+EV+Manufacturing+Next+Generation+Vehicle+Design+Advanced+Driver+Assistance+System+EV+Charging+Infra+site%3awww.bloomberg.com"
+        },
+        {
+            "name": "Most recent",
+            "id": "date",
+            "isSelected": false,
+            "url": "https://api.bing.microsoft.com/api/v7/news/search?q=%22electric+vehicle%22+OR+%22BYD%22+OR+%22Tesla%22+EV+Market%2c+Policy+%26+InvestmentEV+Battery+Summit+Sustainable+EV+Supply+Chain+EV+Manufacturing+Next+Generation+Vehicle+Design+Advanced+Driver+Assistance+System+EV+Charging+Infra+site%3awww.bloomberg.com&sortby=date"
+        }
+    ],
+    "value": [
+        {
+            "name": "Stellantis Workers in Canada Strike as Contract Talks Fail",
+            "url": "https://www.bloomberg.com/news/articles/2023-10-30/stellantis-workers-in-canada-strike-as-contract-talks-fail-locdx4mm",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https://www.bing.com/th?id=OVFT.okBbQ3LtfVa9fpT6wvvYDi&pid=News",
+                    "width": 700,
+                    "height": 466
+                }
+            },
+            "description": "Workers at Stellantis NV\u2019s Canadian plants went on strike after failing to reach a new contract by a Sunday night deadline, giving the automaker a new labor headache just days after it settled a long walkout with the United Auto Workers.",
+            "about": [
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/b965380a-79f8-0ea1-9715-883d67a2c435",
+                    "name": "Workers"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/370ed614-32e1-4326-a356-dc0a7dd56aaa",
+                    "name": "Canada"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/539e2b67-1439-43c4-8114-85b489854ef8",
+                    "name": "Contract"
+                }
+            ],
+            "mentions": [
+                {
+                    "name": "Workers"
+                },
+                {
+                    "name": "Canada"
+                },
+                {
+                    "name": "Contract"
+                }
+            ],
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "Bloomberg L.P.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=ODF.yAnAsiiCHte5V2il_I5mug&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2023-10-30T04:13:00.0000000Z"
+        },
+        {
+            "name": "Ford Deal Includes $8 Billion in Plant Investments, UAW Says",
+            "url": "https://www.bloomberg.com/news/articles/2023-10-29/ford-uaw-deal-includes-car-buying-voucher-higher-401-k-payment",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https://www.bing.com/th?id=OVFT.oIKUDTnigugW2awolqFQeC&pid=News",
+                    "width": 700,
+                    "height": 466
+                }
+            },
+            "description": "Ford Motor Co.\u2019s tentative agreement to end the six-week strike by the United Auto Workers includes $8.1 billion in investments at both internal combustion and electric vehicle plants, as well as record raises.",
+            "about": [
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/35afa8a9-05af-bda7-8819-13e11ca5d726",
+                    "name": "Ford Motor Company"
+                }
+            ],
+            "mentions": [
+                {
+                    "name": "Ford Motor Company"
+                },
+                {
+                    "name": "United Automobile Workers"
+                },
+                {
+                    "name": "Plant"
+                }
+            ],
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "Bloomberg L.P.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=ODF.yAnAsiiCHte5V2il_I5mug&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2023-10-29T22:12:00.0000000Z"
+        },
+        {
+            "name": "Balancing the Balkans as Von der Leyen Tours at Turbulent Time",
+            "url": "https://www.bloomberg.com/news/newsletters/2023-10-30/balancing-the-balkans-as-von-der-leyen-tours-at-turbulent-time",
+            "description": "Welcome to the Brussels Edition, Bloomberg\u2019s daily briefing on what matters most in the heart of the European Union.",
+            "about": [
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/9bd3e6b5-845b-0d06-f372-de529689243c",
+                    "name": "Balkans"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/c32b5fc1-d215-8a0e-9061-237f9155149e",
+                    "name": "Von der Leyen"
+                }
+            ],
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "Bloomberg L.P.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=ODF.yAnAsiiCHte5V2il_I5mug&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2023-10-30T05:39:00.0000000Z"
+        }
+    ]
+}

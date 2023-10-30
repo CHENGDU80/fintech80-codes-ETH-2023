@@ -1,0 +1,208 @@
+{
+    "_type": "News",
+    "readLink": "https://api.bing.microsoft.com/api/v7/news/search?q=electric+vehicle+site%3awww.bloomberg.com",
+    "queryContext": {
+        "originalQuery": "electric vehicle site:www.bloomberg.com",
+        "adultIntent": false
+    },
+    "totalEstimatedMatches": 159,
+    "sort": [
+        {
+            "name": "Best match",
+            "id": "relevance",
+            "isSelected": true,
+            "url": "https://api.bing.microsoft.com/api/v7/news/search?q=electric+vehicle+site%3awww.bloomberg.com"
+        },
+        {
+            "name": "Most recent",
+            "id": "date",
+            "isSelected": false,
+            "url": "https://api.bing.microsoft.com/api/v7/news/search?q=electric+vehicle+site%3awww.bloomberg.com&sortby=date"
+        }
+    ],
+    "value": [
+        {
+            "name": "Electric Travel Trailers Are Coming to the Great Outdoors and Could Upend RVing",
+            "url": "https://www.bloomberg.com/news/articles/2023-10-26/tesla-alums-creating-electric-vehicle-travel-trailers-with-solar-panels",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https://www.bing.com/th?id=OVFT.V12ax9W5MsztuBEvVCTJwS&pid=News",
+                    "width": 700,
+                    "height": 455
+                }
+            },
+            "description": "Increasingly, those trucks and other tow vehicles are electric. About a third of RVers own an electric vehicle and half of EV owners plan to tow a travel trailer, according to the RV Industry Association (RVIA). Investors have taken note of that interest with Lightship having raised $27 million in funding while Pebble has secured $13.6 million.",
+            "about": [
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/adde0763-bd95-84de-fe97-9fc6f61efc75",
+                    "name": "Travel"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/732e1de9-8d5c-15ed-7f0d-7e2169dc9859",
+                    "name": "Tesla Motors"
+                }
+            ],
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "Bloomberg L.P.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=ODF.yAnAsiiCHte5V2il_I5mug&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2023-10-26T14:40:00.0000000Z"
+        },
+        {
+            "name": "Tesla Faces Automated Driving Rival in Geely and Baidu EV",
+            "url": "https://www.bloomberg.com/news/articles/2023-10-27/tesla-faces-self-driving-challenger-as-geely-and-baidu-launch-ev",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https://www.bing.com/th?id=OVFT.BbKTsUilWiIoS8D3XrMmtS&pid=News",
+                    "width": 700,
+                    "height": 525
+                }
+            },
+            "description": "Competition is intensifying in China\u2019s automated-driving scene with the arrival of Jiyue 01, the first electric vehicle from a joint venture between Zhejiang Geely Holding Group Co. and Chinese search and tech giant Baidu Inc.",
+            "about": [
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/8cbad010-9cf5-000a-f0dd-0815861f3c88",
+                    "name": "Baidu"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/04577582-e829-ea74-6c69-9287dfcba3ef",
+                    "name": "Launch"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/afbb820b-bea5-f219-b9ab-1da2fcd54cd9",
+                    "name": "Geely"
+                }
+            ],
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "Bloomberg L.P.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=ODF.yAnAsiiCHte5V2il_I5mug&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2023-10-27T11:00:00.0000000Z",
+            "category": "ScienceAndTechnology"
+        },
+        {
+            "name": "Hyundai\u2019s Profit Beats Estimates on Luxury Car and EV Growth",
+            "url": "https://www.bloomberg.com/news/articles/2023-10-26/hyundai-s-profit-beats-estimates-on-luxury-car-and-ev-growth",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https://www.bing.com/th?id=OVFT.vnWI88tXbEnnx1zGboZfxC&pid=News",
+                    "width": 700,
+                    "height": 466
+                }
+            },
+            "description": "Hyundai Motor Co. reported third-quarter earnings that beat analyst forecasts thanks to strong sales of luxury models and electric vehicles, as well as the Korean won\u2019s continued weakness.",
+            "about": [
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/c92f063f-ea24-87ea-4c1c-150a04855c17",
+                    "name": "Profit"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/70814b95-adbb-8e10-b740-bc976d2c3414",
+                    "name": "Luxury vehicle"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/f410e98c-d1e0-4787-b381-d9fab31f6444",
+                    "name": "Hyundai Motor America"
+                }
+            ],
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "Bloomberg L.P.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=ODF.yAnAsiiCHte5V2il_I5mug&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2023-10-26T05:25:00.0000000Z"
+        },
+        {
+            "name": "Lexus Investigates Setting Up Its Own EV Charging Network",
+            "url": "https://www.bloomberg.com/news/articles/2023-10-25/lexus-investigates-setting-up-its-own-ev-charging-network",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https://www.bing.com/th?id=OVFT.3P1u5X3BfvdGzZHwx6uDQy&pid=News",
+                    "width": 700,
+                    "height": 467
+                }
+            },
+            "description": "Lexus made a name for itself when it launched in 1989 by offering unparalleled customer service. Thirty-four years later, the Toyota Motor Corp.-owned luxury brand is dissatisfied with the experiences its initial electric vehicle owners are having trying to charge their cars.",
+            "about": [
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/eda4b464-cc73-d7d2-7a6f-97081a5e3d33",
+                    "name": "Lexus"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/1844fd9c-3973-d369-039f-d6bc80542b6c",
+                    "name": "Computer network"
+                }
+            ],
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "Bloomberg L.P.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=ODF.yAnAsiiCHte5V2il_I5mug&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2023-10-25T07:45:00.0000000Z"
+        },
+        {
+            "name": "Thailand Bets on EVs to Draw Trillion Baht in Investment",
+            "url": "https://www.bloomberg.com/news/articles/2023-10-26/thailand-bets-on-evs-to-draw-trillion-baht-in-foreign-investment",
+            "image": {
+                "thumbnail": {
+                    "contentUrl": "https://www.bing.com/th?id=OVFT.stLpn-Lix8fxEq6NY7pZfy&pid=News",
+                    "width": 700,
+                    "height": 466
+                }
+            },
+            "description": "Thailand, renowned as the \u2018Detroit of Asia\u2019 for its production of internal combustion engine cars, wants to break into the top tier of electric vehicle makers as part of a goal to lure 1 trillion baht ($28 billion) of investments in four years.",
+            "about": [
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/588bd4b9-e440-b7eb-2cab-2a54c0458548",
+                    "name": "Thailand"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/287e9214-975f-5bc1-bff0-a8b2502a5829",
+                    "name": "Thai baht"
+                },
+                {
+                    "readLink": "https://api.bing.microsoft.com/api/v7/entities/d56fe443-56c0-e097-bd1f-dbb2c70faf6c",
+                    "name": "Investment"
+                }
+            ],
+            "provider": [
+                {
+                    "_type": "Organization",
+                    "name": "Bloomberg L.P.",
+                    "image": {
+                        "thumbnail": {
+                            "contentUrl": "https://www.bing.com/th?id=ODF.yAnAsiiCHte5V2il_I5mug&pid=news"
+                        }
+                    }
+                }
+            ],
+            "datePublished": "2023-10-26T03:12:00.0000000Z"
+        }
+    ]
+}

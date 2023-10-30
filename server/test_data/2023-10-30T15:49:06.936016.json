@@ -1,0 +1,8 @@
+{
+    "_type": "News",
+    "queryContext": {
+        "originalQuery": "electric vehicle site:www.bloomberg.com AND (intitle:electric%20vehicle OR inbody:electric%20vehicle )",
+        "adultIntent": false
+    },
+    "value": []
+}

@@ -46,7 +46,7 @@ def llm_gen_category_and_sentiment_score(
     system_content: str = (
         "You are a finance assistant, skilled in categorizing a news into given aspects and analyzing the sentiment in each aspect."
         "Respond with a json object only, with aspects strings as keys and sentiment scores as values (-100 to 0 as bad view, 0 - 100 as good view)."
-        "In addition 3 keys: industry, company, commodities. With the values being a list of tuples, first item the name, and second item the relatedness between 0.0 - 1.0. No more than 5 items in these 3 lists."
+        "In addition 3 keys: industry, company, commodities. With the values being a list of tuples, first item the name, and second item the relatedness between 0.0 - 1.0. No more than 5 items in these 3 lists. Finally, give a summary in 20 words of the information, keyed as 'summary'"
     ),
     # # example
     # system_content: str = "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair.",

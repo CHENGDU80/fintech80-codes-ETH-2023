@@ -1,0 +1,9 @@
+{
+    "q": [
+        "site:www.bloomberg.com AND intitle:EV OR inbody:EV OR intitle:electric%20vehicle"
+    ],
+    "count": 5,
+    "freshness": "Day",
+    "mkt": "en-US",
+    "category": "Business"
+}

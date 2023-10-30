@@ -3,6 +3,7 @@ import os
 import requests
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+import traceback
 
 
 '''
@@ -37,31 +38,92 @@ def extract_text(url):
     text = soup.get_text(separator=' ', strip=True)
     
     return text
-# Add your Bing Search V7 subscription key and endpoint to your environment variables.
-subscription_key = '17b0e541b344457b87b0a1d1727bd8b8'
-# Query term(s) to search for.
-# Construct a request
-endpoint = 'https://api.bing.microsoft.com/v7.0/news/search'
-today = (datetime.utcnow()).strftime('%Y-%m-%d')#today's date
-params = {
-    "q": "electric vehicle",
-    "count": 1,
-    "freshness": "Day",
-    "mkt": "en-US",  
-}
-headers = { 'Ocp-Apim-Subscription-Key': subscription_key }
-# Call the API
-try:
-    response = requests.get(endpoint, headers=headers, params=params)
-    response.raise_for_status()
-    if response.status_code == 200:
-        with open(f'{today}.json', 'w') as f:
-            json.dump(response.json()['value'], f)
-        # for i in range(len(response.json()['value'])):
-        #     url = response.json()['value'][i]['url']
-        #     text = extract_text(url)
-            
-        # with open(f'{today}.json', 'w') as f:
-        #     json.dump(response, f)
-except Exception as ex:
-    raise ex
+
+
+def get_bing_headers():
+    return { 'Ocp-Apim-Subscription-Key': '17b0e541b344457b87b0a1d1727bd8b8'}
+
+
+def get_bing_params(
+    advanced_query: str,
+    count: int = 1,
+    freshness: str = "Week",  # or a date range
+    market: str = "en-US",
+    category: str = "Business",  # [Business, ScienceAndTechnology, Politics] for en-US
+):
+    """Keywords on https://learn.microsoft.com/en-us/bing/search-apis/bing-news-search/reference/query-parameters#news-categories-by-market"""
+    return {
+        "q": advanced_query,
+        "count": count,
+        "freshness": freshness,
+        "mkt": market,
+        "category": category,
+    }
+
+
+BING_ENDPOINT_NEWS_SEARCH = 'https://api.bing.microsoft.com/v7.0/news/search'
+
+
+def bing_news_search(
+    params,
+    endpoint: str = BING_ENDPOINT_NEWS_SEARCH,
+) -> requests.Response | None:
+    try:
+        response: requests.Response = requests.get(
+            endpoint,
+            headers=get_bing_headers(),
+            params=params,
+        )
+        response.raise_for_status()
+        if response.status_code == 200:
+            return response
+            # for i in range(len(response.json()['value'])):
+            #     url = response.json()['value'][i]['url']
+            #     text = extract_text(url)
+                
+            # with open(f'{today}.json', 'w') as f:
+            #     json.dump(response, f)
+    except Exception as ex:
+        traceback.print_exc()
+        print("Error: ex")
+
+
+def save_bing_results(response: requests.Response, query_params: dict):
+    if response is None:
+        print("NoOp! Input is None")
+
+    file_ts = datetime.now().isoformat()
+    with open(f'{file_ts}.json', 'w') as f:
+        json.dump(response.json(), f)
+    print(f"Response saved to {file_ts}.json")
+
+    with open(f'{file_ts}_params.json', 'w') as f:
+        json.dump(query_params, f)
+    print(f"Query params saved to {file_ts}.json")
+
+
+def _main():
+    params = get_bing_params(
+        advanced_query="electric vehicle site:www.bloomberg.com",
+        # (
+        #     '"electric vehicle" OR "BYD" OR "Tesla" '
+        #     'EV Market, Policy & Investment'
+        #     'EV Battery Summit '
+        #     'Sustainable EV Supply Chain '
+        #     'EV Manufacturing '
+        #     'Next Generation Vehicle Design '
+        #     'Advanced Driver Assistance System '
+        #     'EV Charging Infra '
+        #     "site:www.bloomberg.com"
+        #     # " AND "
+        #     # "intitle:electric%20vehicle OR inbody:electric%20vehicle )",
+        # ),
+        count=5,
+    )
+
+    resp = bing_news_search(params=params)
+    save_bing_results(response=resp, query_params=params)
+
+
+if __name__ == "__main__":
+    _main()

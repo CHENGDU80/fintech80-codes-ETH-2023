@@ -1,0 +1,52 @@
+{
+  "policy": 0,
+  "cash flow": 0,
+  "interest rate": 0,
+  "tech innovation": 100,
+  "industry": [
+    [
+      "automotive",
+      0.8
+    ],
+    [
+      "technology",
+      0.6
+    ],
+    [
+      "electric vehicles",
+      0.7
+    ],
+    [
+      "artificial intelligence",
+      0.5
+    ],
+    [
+      "self-driving cars",
+      0.9
+    ]
+  ],
+  "company": [
+    [
+      "Tesla",
+      0.7
+    ],
+    [
+      "Geely",
+      0.6
+    ],
+    [
+      "Baidu",
+      0.8
+    ],
+    [
+      "Xpeng",
+      0.4
+    ],
+    [
+      "Huawei",
+      0.6
+    ]
+  ],
+  "commodities": [],
+  "summary": "Competition in China's automated-driving scene intensifies as Geely and Baidu launch Jiyue 01, equipped with Baidu's Apollo platform, aimed at challenging Tesla's self-driving technology."
+}

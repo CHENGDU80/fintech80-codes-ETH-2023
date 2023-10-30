@@ -1,0 +1,21 @@
+{
+  "id": "chatcmpl-8FI08udo4UebiySnTZzhOGgKYTh3s",
+  "object": "chat.completion",
+  "created": 1698654808,
+  "model": "gpt-3.5-turbo-0613",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"policy\": 0,\n  \"cash flow\": 0,\n  \"interest rate\": 0,\n  \"tech innovation\": 100,\n  \"industry\": [\n    [\n      \"automotive\",\n      0.8\n    ],\n    [\n      \"technology\",\n      0.6\n    ],\n    [\n      \"electric vehicles\",\n      0.7\n    ],\n    [\n      \"artificial intelligence\",\n      0.5\n    ],\n    [\n      \"self-driving cars\",\n      0.9\n    ]\n  ],\n  \"company\": [\n    [\n      \"Tesla\",\n      0.7\n    ],\n    [\n      \"Geely\",\n      0.6\n    ],\n    [\n      \"Baidu\",\n      0.8\n    ],\n    [\n      \"Xpeng\",\n      0.4\n    ],\n    [\n      \"Huawei\",\n      0.6\n    ]\n  ],\n  \"commodities\": [],\n  \"summary\": \"Competition in China's automated-driving scene intensifies as Geely and Baidu launch Jiyue 01, equipped with Baidu's Apollo platform, aimed at challenging Tesla's self-driving technology.\"\n}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 865,
+    "completion_tokens": 249,
+    "total_tokens": 1114
+  }
+}

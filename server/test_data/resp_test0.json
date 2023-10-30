@@ -1,0 +1,21 @@
+{
+  "id": "chatcmpl-8FDo1oWwcEgJzyhwNGLI0Stj2IMPS",
+  "object": "chat.completion",
+  "created": 1698638681,
+  "model": "gpt-3.5-turbo-0613",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "{\n  \"policy\": 0,\n  \"cash flow\": 50,\n  \"interest rate\": -20,\n  \"tech innovation\": 70,\n  \"industry\": [\n    [\"automotive\", 0.8],\n    [\"electric vehicles\", 0.7],\n    [\"used car dealership\", 0.6],\n    [\"data analytics\", 0.4],\n    [\"EV market\", 0.3]\n  ],\n  \"company\": [\n    [\"EVAuto\", 0.9],\n    [\"Cloud Theory\", 0.7],\n    [\"Tesla\", 0.6],\n    [\"Hyundai\", 0.5],\n    [\"Volkswagen\", 0.4]\n  ],\n  \"commodities\": [\n    [\"electric vehicles\", 0.8],\n    [\"EV batteries\", 0.7],\n    [\"charging stations\", 0.6],\n    [\"EV market\", 0.5],\n    [\"electric car models\", 0.4]\n  ]\n}"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 2575,
+    "completion_tokens": 209,
+    "total_tokens": 2784
+  }
+}
