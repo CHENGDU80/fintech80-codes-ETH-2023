@@ -7,6 +7,22 @@ from llm_completion import (
     llm_construct_chat_keyword_gen,
 )
 
+from models import BingNews, BingSearchResp, Event, Company
+from db_connections import db_conn_mongo, db_conn_redis
+from fetch_news import get_news
+
+
+### DB conn ####################################################################
+# Mongo
+col_company = db_conn_mongo.get_collection(database_name="main", collection_name="company")
+col_event = db_conn_mongo.get_collection(database_name="main", collection_name="event")
+col_bingnews = db_conn_mongo.get_collection(database_name="main", collection_name="bingnews")
+col_bingsearchresp = db_conn_mongo.get_collection(database_name="main", collection_name="bingsearchresp")
+# redis
+rdb = db_conn_redis.get_rdb()
+
+### APP setup ##################################################################
+
 
 app = FastAPI()
 
@@ -21,7 +37,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 # @app.get("/")
 # async def read_root():
@@ -64,3 +79,10 @@ async def read_item(question: str | None = None):
     )
     print("Gen keywords:", keywords)
     return {"question": question, "kws": keywords.choices[0].message}
+
+
+@app.get("/pull_golden_news")
+async def pull_golden_news(count: int = 5):
+    resp = get_news()
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    print(resp)

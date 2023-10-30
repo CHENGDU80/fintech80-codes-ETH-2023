@@ -1,5 +1,7 @@
 pydantic
-# pymongo
+pydantic-settings
+bson
+pymongo
 python-dotenv
 # docker
 requests
@@ -7,7 +9,7 @@ requests
 
 fastapi
 uvicorn[standard]
-# redis
+redis
 
 # # FastAPI form data
 # python-multipart

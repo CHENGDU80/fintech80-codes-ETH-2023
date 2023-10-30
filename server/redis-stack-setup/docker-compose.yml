@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  redis-stack-server:
+    image: redis/redis-stack-server:7.2.0-v2
+    container_name: redis-stack-server
+    environment:
+      REDIS_ARGS: "--requirepass ${REDIS_AUTH} --save 60 10 --appendonly yes"
+      # meaning of the above options to redis:
+      #   passwd auth
+      #   save to dump.rdb every 60 secs if more than 10 entries changed
+      #   enable aof backup
+    volumes:
+    - ${REDIS_DATA_PERSIST_DIR}:/data
+    networks:
+    - redis-stack-network
+    ports:
+    - 6379:6379
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a ${REDIS_AUTH} ping | grep PONG"]
+      interval: 30s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+  redis-insight:
+    image: redis/redis-stack:7.2.0-v2
+    container_name: redisinsight-webgui
+    volumes:
+    - ${REDIS_INSIGHT_DIR}:/redisinsight
+    - type: bind
+      source: ./redisinsight_settings.conf
+      target: /opt/redis-stack/share/redisinsight/.env
+    working_dir: /opt/redis-stack
+    command: /opt/redis-stack/nodejs/bin/node -r /opt/redis-stack/share/redisinsight/api/node_modules/dotenv/config share/redisinsight/api/dist/src/main.js dotenv_config_path=/opt/redis-stack/share/redisinsight/.env
+    environment:
+    - RIAUTHPROMPT=1
+    - RIAUTHTIMER=30
+    depends_on:
+    - redis-stack-server 
+    networks:
+    - redis-stack-network
+    ports:
+    - 7000:8001
+    restart: unless-stopped
+
+networks:
+  redis-stack-network:
+    name: redis-stack-network
