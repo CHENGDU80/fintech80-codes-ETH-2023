@@ -14,3 +14,6 @@ uvicorn[standard]
 
 # data
 pandas
+
+# openai/GPT API
+openai
