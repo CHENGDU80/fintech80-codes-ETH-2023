@@ -131,7 +131,12 @@ async def proc_news(
     print(f"DB query: {db_query}")
     results = col_nc_news.find(db_query)
 
-    lst_nc_news = [NCNews(**doc) for doc in results]
+    lst_nc_news = []
+    for doc in results:
+        doc['_id'] = str(doc['_id'])
+        nc_news = NCNews(**doc)
+        lst_nc_news.append(nc_news)
+
     for nc_news in lst_nc_news:
         print(nc_news.query_str, nc_news.published_date)
     return {"n_records_found": len(lst_nc_news)}
