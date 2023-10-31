@@ -128,6 +128,12 @@ class NCNews(BaseModel):
     infl_fin: float = Field(default_factory=float)
     infl_policy: float = Field(default_factory=float)
 
+    # relatedness and influence for companies and commodities
+    company_ids: List[str] = Field(default_factory=list)
+    company_relevances: List[str] = Field(default_factory=list)
+    commodity_ids: List[str] = Field(default_factory=list)
+    commodity_relevances: List[str] = Field(default_factory=list)
+
     # reverse link to parent categories
     # NCSearchResp
     nc_search_id: str
@@ -143,22 +149,29 @@ class NCNews(BaseModel):
 class Event(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
 
-    ev_infl_tech: float
-    ev_infl_fin: float
-    ev_infl_policy: float
-    ev_summary: str  # short, but several sentences
-    ev_summary_short: str  # one line, headline style, for gpt too
+    for_date: str
+    ev_description: str  # short, but several sentences
+    ev_summary_short: str  # one line, headline style
 
     create_ts: str = Field(default=datetime.datetime.now().isoformat())
-    update_ts: str = Field(default=datetime.datetime.now().isoformat())
 
     bing_news_ids: List[str] = Field(default_factory=list)
     nc_news_ids: List[str] = Field(default_factory=list)  # the news in the same cluster (probably won't do it)
     core_news_ids: List[str] = Field(default_factory=list)  # the news IDs used to generate the summary and description
     previous_event_id: str | None = Field(default=None)  # if can be linked to a prev day's event
 
+    # calculated from the core_news_ids
+    ev_infl_tech: float
+    ev_infl_fin: float
+    ev_infl_policy: float
+
+    # influence combined
+    ev_infl_combined: float
+
     company_ids: List[str] = Field(default_factory=list)
     company_relevances: List[float] = Field(default_factory=list)
+    commodity_ids: List[str] = Field(default_factory=list)
+    commodity_relevances: List[str] = Field(default_factory=list)
 
     class Config:
         json_encoders = {ObjectId: str}
@@ -169,9 +182,16 @@ class Event(BaseModel):
 class Company(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
 
+    company_name: str
+
     primary_industry: str  # TODO: also entity?
     event_ids: List[str]= Field(default_factory=list)
     event_relevances: List[float] = Field(default_factory=list)
+
+    # with each above event, how did this change
+    lst_score_tech: List[float] = Field(default_factory=list)
+    lst_score_fin: List[float] = Field(default_factory=list)
+    lst_score_policy: List[float] = Field(default_factory=list)
 
     # TODO: what are the initial values based on? Or do we care only about the derivatives
     score_tech: float
@@ -194,7 +214,11 @@ class Company(BaseModel):
 
 
 class Commodity(BaseModel):
-    """"""
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
 
-class Industry(BaseModel):
-    """"""
+    event_ids: List[str]= Field(default_factory=list)
+    event_relevances: List[float] = Field(default_factory=list)
+    # simply plus or minus
+    lst_event_infl: List[float] = Field(default_factory=list)
+
+    index: float
