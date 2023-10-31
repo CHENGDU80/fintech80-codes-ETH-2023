@@ -128,6 +128,7 @@ async def proc_news(
         "published_date": {"$regex": f"^{date.strip()}"},
         "q": query.strip(),
     }
+    print(db_query)
     results = col_nc_news.find(db_query)
 
     lst_nc_news = [NCNews(**doc) for doc in results]
