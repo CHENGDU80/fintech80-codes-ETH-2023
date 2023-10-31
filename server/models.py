@@ -27,14 +27,14 @@ class PyObjectId(ObjectId):
             raise ValueError("Invalid objectid")
         return ObjectId(v)
     
-    @classmethod
-    def __get_pydantic_json_schema__(
-        cls, core_schema: CoreSchema, handler: GetJsonSchemaHandler
-    ) -> dict[str, Any]:
-        json_schema = super().__get_pydantic_json_schema__(core_schema, handler)
-        json_schema = handler.resolve_ref_schema(json_schema)
-        json_schema.update(type="string")
-        return json_schema
+    # @classmethod
+    # def __get_pydantic_json_schema__(
+    #     cls, core_schema: CoreSchema, handler: GetJsonSchemaHandler
+    # ) -> dict[str, Any]:
+    #     json_schema = super().__get_pydantic_json_schema__(core_schema, handler)
+    #     json_schema = handler.resolve_ref_schema(json_schema)
+    #     json_schema.update(type="string")
+    #     return json_schema
 
 
 class BingSearchResp(BaseModel):
@@ -222,3 +222,8 @@ class Commodity(BaseModel):
     lst_event_infl: List[float] = Field(default_factory=list)
 
     index: float
+
+    class Config:
+        json_encoders = {ObjectId: str}
+        arbitrary_types_allowed = True
+        populate_by_name = True
