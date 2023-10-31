@@ -15,8 +15,8 @@ import pandas as pd
 from typing import Set
 
 # local imports
-from models import NCNews
-from llm_completion import llm_complete_chat, llm_summarize_event
+from models import NCNews, Event
+from llm_completion import llm_complete_chat, llm_summarize_event, llm_summarize_event_with_prev
 
 
 # load bing env
@@ -179,6 +179,7 @@ def cluster_get_main_and_multi_angle(
     df_unique_labeled: pd.DataFrame,
     labels_set: Set[int],
     n_multi_view: int = 3,  # number of additional different "views" within the same bigger cluster
+    prev_events: list[Event] | None = None,
 ) -> dict[int, list[str]]:
     """Given all articles of date with labels, create different views in same cluster (combine them as the main event)
 
@@ -187,6 +188,7 @@ def cluster_get_main_and_multi_angle(
     """
     # To get the actual closest points from df
     selection = {}  # kcluster id => [record ids of selected multi-view articles],
+    events = []
 
     for label in sorted(labels_set):
         selection[label] = []
@@ -229,7 +231,7 @@ def cluster_get_main_and_multi_angle(
 
             selection[label].append(record_id)
         
-        # TODO: comment these test lines
+
         # summarize with GPT
         user_content = []
         for i, rid in enumerate(selection[label]):
@@ -238,12 +240,44 @@ def cluster_get_main_and_multi_angle(
             user_content.append(f"Title: {tmp_df['title'].iloc[0]}")
             user_content.append(f"Content: {tmp_df['summary'].iloc[0]}")
         str_user_content = "\n".join(user_content)
-        gpt_resp = llm_complete_chat(messages=llm_summarize_event(user_content=str_user_content), model="gpt-3.5-turbo-16k")
-        print(f"Event [{label}] GPT summarization:\n{gpt_resp.choices[0].message}")
-        
+        if prev_events is not None:
+            lst_prev_evs = [ev.ev_summary_short for ev in prev_events]
+            gpt_resp = llm_complete_chat(messages=llm_summarize_event_with_prev(user_content=str_user_content, prev_events=lst_prev_evs), model="gpt-3.5-turbo-16k")
+            try:
+                json_resp = gpt_resp.choices[0].message["content"]
+                obj_resp =json.loads(json_resp)
+                ev_summary = obj_resp["event_summary"]
+                ev_desc = obj_resp["event_description"]
+                ev_matched = int(obj_resp["matched"])
+            except Exception as e:
+                print("Cannot load GPT response to event summary and description.")
+                ev_summary = "Error response from GPT"
+                ev_desc = "Error response from GPT"
+                ev_matched = -1
+
+            if ev_matched < 0 or ev_matched > len(prev_events):
+                event = {'label': label, 'prev_ev_record_id': "", 'summary': ev_summary, 'description': ev_desc}
+            else:
+                event = {'label': label, 'prev_ev_record_id': (prev_events[ev_matched].id), 'summary': ev_summary, 'description': ev_desc}
+        else:
+            gpt_resp = llm_complete_chat(messages=llm_summarize_event(user_content=str_user_content), model="gpt-3.5-turbo-16k")
+            try:
+                json_resp = gpt_resp.choices[0].message["content"]
+                obj_resp =json.loads(json_resp)
+                ev_summary = obj_resp["event_summary"]
+                ev_desc = obj_resp["event_description"]
+            except Exception as e:
+                print("Cannot load GPT response to event summary and description.")
+                ev_summary = "Error response from GPT"
+                ev_desc = "Error response from GPT"
+            event = {'label': label, 'prev_ev_record_id': "", 'summary': ev_summary, 'description': ev_desc}
+
+        events.append(event)
+        print(f"Event [{label}] GPT summarization:\n{event}")
+
         print("\n\n")
     
-    return selection
+    return selection, []
 
 
 def _main():

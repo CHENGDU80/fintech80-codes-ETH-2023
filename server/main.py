@@ -1,5 +1,6 @@
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import HTTPException
 
 # local import
 from llm_completion import (
@@ -32,6 +33,11 @@ col_nc_news = db_conn_mongo.get_collection(database_name="main", collection_name
 col_nc_search_resp = db_conn_mongo.get_collection(database_name="main", collection_name="ncsearchresp")
 # redis
 rdb = db_conn_redis.get_rdb()
+
+
+### Simple token for get requests
+SIMPLE_TOKEN = "K6tyfzrSrVjRHHqOaeHNI3OM7IPk82ky"
+
 
 ### APP setup ##################################################################
 
@@ -107,6 +113,27 @@ async def pull_golden_news(count: int = 2):
         "success": True,
         "bing_news_search_resp": resp.model_dump_json(),
     }
+
+
+@app.get("/proc_news_to_events")
+async def proc_news(
+    query: str,
+    date: str,
+    token: str | None = None,
+):
+    if token is None or token != SIMPLE_TOKEN:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    db_query = {
+        "published_date": {"$regex": f"^{date.strip()}"},
+        "q": "query"
+    }
+    results = col_nc_news.find(db_query)
+
+    lst_nc_news = [NCNews(**doc) for doc in results]
+    for nc_news in lst_nc_news:
+        print(nc_news.query_str, nc_news.published_date)
+    return {"n_records_found": len(lst_nc_news)}
 
 
 @app.get("/pull_news_via_nc", status_code=status.HTTP_200_OK)
