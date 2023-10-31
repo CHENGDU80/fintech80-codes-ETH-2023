@@ -114,7 +114,7 @@ async def pull_golden_news(count: int = 2):
         "bing_news_search_resp": resp.model_dump_json(),
     }
 
-
+# queries = [“electric car OR charging station OR battery technology”, “BMW”, “Tesla”, “NIO”, “BYD”, “XPENG”, “CATL”]
 @app.get("/proc_news_to_events")
 async def proc_news(
     query: str,
@@ -126,7 +126,7 @@ async def proc_news(
 
     db_query = {
         "published_date": {"$regex": f"^{date.strip()}"},
-        "q": "query"
+        "q": query.strip(),
     }
     results = col_nc_news.find(db_query)
 
