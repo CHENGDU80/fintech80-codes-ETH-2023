@@ -101,6 +101,7 @@ def get_news_nc(
     articles = resp_json.pop(_KEY_NC_SEARCH_ARTICLES)
 
     search_resp = NCSearchResp(
+        query_str=advanced_query,  # for ease of matching
         status=resp_json["status"],
         total_hits=resp_json["total_hits"],
         page=resp_json["page"],
@@ -111,6 +112,7 @@ def get_news_nc(
 
     for res in articles:
         news = NCNews(
+            query_str=advanced_query,  # for ease of matching
             title=res["title"],
             author=res["author"],
             published_date=res["published_date"],

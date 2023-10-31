@@ -81,6 +81,7 @@ class BingNews(BaseModel):
 class NCSearchResp(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
 
+    query_str: str
     status: str
     total_hits: int
     page: int
@@ -100,6 +101,7 @@ class NCSearchResp(BaseModel):
 class NCNews(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
 
+    query_str: str  # for ease of direct filter
     title: str
     author: str
     published_date: str
@@ -153,6 +155,9 @@ class Event(BaseModel):
     bing_news_ids: List[str] = Field(default_factory=list)
     nc_news_ids: List[str] = Field(default_factory=list)
 
+    company_ids: List[str] = Field(default_factory=list)
+    company_relevances: List[float] = Field(default_factory=list)
+
     class Config:
         json_encoders = {ObjectId: str}
         arbitrary_types_allowed = True
@@ -164,6 +169,7 @@ class Company(BaseModel):
 
     primary_industry: str  # TODO: also entity?
     event_ids: List[str]= Field(default_factory=list)
+    event_relevances: List[float] = Field(default_factory=list)
 
     # TODO: what are the initial values based on? Or do we care only about the derivatives
     score_tech: float
