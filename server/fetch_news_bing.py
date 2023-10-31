@@ -63,7 +63,7 @@ def bing_news_search(
         print(f"Error: {ex}")
 
 
-def get_news(
+def get_news_bing(
     advanced_query: str = "electric vehicle site:www.bloomberg.com",
     count: int = 1,
     category: str | None = None,

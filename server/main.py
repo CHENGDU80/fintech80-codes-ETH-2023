@@ -9,7 +9,7 @@ from llm_completion import (
 
 from models import BingNews, BingSearchResp, Event, Company
 from db_connections import db_conn_mongo, db_conn_redis
-from fetch_news import get_news
+from fetch_news_bing import get_news_bing
 
 
 ### DB conn ####################################################################
@@ -83,7 +83,7 @@ async def read_item(question: str | None = None):
 
 @app.get("/pull_golden_news", status_code=status.HTTP_200_OK)
 async def pull_golden_news(count: int = 2):
-    resp: BingSearchResp | None = get_news(count=count)
+    resp: BingSearchResp | None = get_news_bing(count=count)
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     if resp is None:
         return {"success": False}
