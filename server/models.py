@@ -123,7 +123,7 @@ class NCNews(BaseModel):
     api_entity_id: str
 
     # processed output
-    summary: str = Field(default_factory=str)
+    ai_summary: str = Field(default_factory=str)
     infl_tech: float = Field(default_factory=float)
     infl_fin: float = Field(default_factory=float)
     infl_policy: float = Field(default_factory=float)
@@ -153,7 +153,9 @@ class Event(BaseModel):
     update_ts: str = Field(default=datetime.datetime.now().isoformat())
 
     bing_news_ids: List[str] = Field(default_factory=list)
-    nc_news_ids: List[str] = Field(default_factory=list)
+    nc_news_ids: List[str] = Field(default_factory=list)  # the news in the same cluster (probably won't do it)
+    core_news_ids: List[str] = Field(default_factory=list)  # the news IDs used to generate the summary and description
+    previous_event_id: str | None = Field(default=None)  # if can be linked to a prev day's event
 
     company_ids: List[str] = Field(default_factory=list)
     company_relevances: List[float] = Field(default_factory=list)

@@ -19,3 +19,7 @@ pandas
 
 # openai/GPT API
 openai
+
+# clustering and embeddings
+cohere
+scikit-learn

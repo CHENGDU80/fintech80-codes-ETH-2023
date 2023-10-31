@@ -39,6 +39,23 @@ def llm_complete_chat(
     return completion
 
 
+# summarize event
+def llm_summarize_event(
+    user_content: str,
+    system_content: str = (
+        "You are a finance assistant, skilled in combining news and find what's in common (identify key event)"
+        "Respond with a json object only, with key 'event_summary' with a short sentence (no more than 20 words),"
+        "and key 'event_description' with a slightly longer exerpt introducing the event and giving an explanation how the news are considered the same event (less than 80 words)."
+    ),
+):
+    return[
+        {"role": "system", "content": system_content},
+        {"role": "user", "content": (
+            f"Analyze the content from these different news articles and summarize them to a common event. Here're the news articles {user_content}\n"
+        )},
+    ]
+
+
 # anaylisys
 def llm_gen_category_and_sentiment_score(
     user_content: str,
@@ -60,3 +77,62 @@ def llm_gen_category_and_sentiment_score(
             f"Given this news webpage abstract: {user_content}"
         )},
     ]
+
+
+
+
+# import openai
+
+# openai.api_key = "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"
+
+
+# from tqdm import tqdm
+
+
+# for i, d in tqdm(df_unique.iterrows()):
+#     if i == 0:
+#         continue
+#     text = d["article"]
+#     title = d["title"]
+
+#     system_content: str = ("""TASKS: 
+#     1.When the user provides TEXT and TITLE, summarize them very clearly in 50 words. Pay both attention to the TEXT and the TITLE.
+#     2.Analyze the relevance scores of the TEXT in these 3 aspects: TECHNOLOGY, FINANCE, POLICY.
+#     3.Analyze the sentiments scores of the TEXT in these 3 aspects: TECHNOLOGY, FINANCE, POLICY.
+#     4.Respond with a json object only, with Summary, Technology, Finance, Policy as keys, the summary and a dictionary of relevance scores (float, from 0.0 as Not Relevant to 1.0 as Strongly Relevant) and sentiment scores (int, -1 as Negative, 0 as Neutral, and 1 as Positive) as values.
+
+#     """ 
+#     """
+#     Instruction:  
+#     Here is a sample TITLE: Chery Accelerates EV Technology Advancements Amid Financial Crunch
+#     Here is a sample TEXT: Chery announces a comprehensive technological transformation plan aimed at enhancing their electric vehicle (EV) offerings. This may include advancements in battery technology and sustainable energy solutions.While embarking on these technological improvements and workforce development initiatives, Chery acknowledges a short-term finance shortage. The company is actively exploring cost-saving measures to address this challenge.In response to Chery's efforts, the government announces new policy support to incentivize and facilitate the transition to technologies.
+#     Here is a sample response with summary and scores: {"Summary": "Chery unveils a thorough tech transformation plan to bolster its electric vehicle (EV) segment, encompassing battery technology upgrades and sustainable energy solutions. Despite facing a short-term financial deficit, Chery is adopting cost-saving strategies. In support, the government introduces policies incentivizing this technological shift, aiding Chery's transition journey.", "Technology": {"relevance": 0.8, "sentiment": 1}, "Finance": {"relevance": 0.6, "sentiment": -1}, "Policy": {"relevance": 0.9, "sentiment": 1}}
+#     Here are some keywords from the TEXT that lead to the sample scores: Technology: "technological transformation",  "advancement", "battery"; Finance:"finance shortage", "challenge"; Policy:"government", "policy", "incentivize";
+#     """)
+
+
+
+#     inst = [
+#         {"role": "system", "content": system_content},
+#         {"role": "user", "content": (
+#             f"Analyze the relevance score and sentiment score in these 3 fields: 'Technology', 'Finance', 'Policy'\n"
+#             f"Given this news TEXT: {text} and this news TITLE: {title}"
+#         )},
+#     ]
+
+#     resp = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=inst)
+
+#     try:
+#         with open("data/articles/" + str(i) + ".json", "w") as f:
+#             json.dump(json.loads(resp.choices[0].message.content), f)
+#     except:
+#         print("error")
+#         print(resp.choices[0].message.content)
+#         print()
+
+
+
+# resp = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=inst)
+
+
+# json.loads(resp.choices[0].message.content)
