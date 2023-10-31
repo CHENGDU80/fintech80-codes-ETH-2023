@@ -134,9 +134,7 @@ async def proc_news(
     lst_nc_news = []
     for doc in results:
         nc_news = NCNews.model_validate(doc)
-        # doc['_id'] = str(doc['_id'])
-        # nc_news = NCNews(**doc)
-        # lst_nc_news.append(nc_news)
+        lst_nc_news.append(nc_news)
 
     for nc_news in lst_nc_news:
         print(nc_news.query_str, nc_news.published_date)
