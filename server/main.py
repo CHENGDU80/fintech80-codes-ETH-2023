@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 
 # local import
@@ -38,9 +38,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# @app.get("/")
-# async def read_root():
-#     return {"Hello": "World"}
+@app.get("/")
+async def test_conn():
+    return {"ping": "pong"}
 
 @app.get("/getfakedata")
 async def get_fake_data():
@@ -81,8 +81,17 @@ async def read_item(question: str | None = None):
     return {"question": question, "kws": keywords.choices[0].message}
 
 
-@app.get("/pull_golden_news")
-async def pull_golden_news(count: int = 5):
-    resp = get_news()
+@app.get("/pull_golden_news", status_code=status.HTTP_200_OK)
+async def pull_golden_news(count: int = 2):
+    resp: BingSearchResp | None = get_news(count=count)
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    if resp is None:
+        return {"success": False}
     print(resp)
+
+    # TODO: store in DB
+
+    return {
+        "success": True,
+        "bing_news_search_resp": resp.model_dump_json(),
+    }

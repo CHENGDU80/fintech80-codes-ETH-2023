@@ -65,11 +65,17 @@ def bing_news_search(
 
 def get_news(
     advanced_query: str = "electric vehicle site:www.bloomberg.com",
+    count: int = 1,
+    category: str | None = None,
+    market: str = "en-US",
+    freshness: str = "Week",
 ) -> BingSearchResp | None:
     params = get_bing_params(
         advanced_query=advanced_query,
-        count=5,
-        category=None,
+        count=count,
+        category=category,
+        freshness=freshness,
+        market=market,
     )
     resp = bing_news_search(params=params)
     if resp is None:
@@ -92,11 +98,12 @@ def get_news(
             about=json.dumps(res["about"]),
             provider=json.dumps(res["provider"]),
             date_published=res["datePublished"],
-            search=str(bing_search_resp.id),
+            bing_search_id=str(bing_search_resp.id),
         )
+        print(news)
         bing_search_resp.news_ids.append(str(news.id))
     
-    return resp
+    return bing_search_resp
 
 
 def _save_bing_results(response: requests.Response, query_params: dict):

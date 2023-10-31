@@ -1,12 +1,11 @@
 from pydantic_settings import BaseSettings
-from pydantic import MongoDsn
 import redis
 import pymongo
 from pymongo.collection import Collection
 
 
 class Settings(BaseSettings):
-    mongo_dsn: MongoDsn
+    mongo_dsn: str
     redis_auth: str
     class Config:
         env_file = "./env_files/.dbs.env"

@@ -4,12 +4,10 @@
 
 ### Initial deployment of MongoDB
 
-***IMPORTANT*** the env file should be `.env` file to be used by docker compose.
-
-* Copy the `.mongodb.env.template` to a `.env` file and fill in the `[xxx]` fields
+* Copy the `.mongodb.env.template` fields to relevant of simple-docker-compose.yml 
 * Launch the containers
     ```bash
-    docker compose -f docker-compose-mongo.yml up
+    docker compose -f simple-docker-compose.yml up
     ```
 * Inspect DBs
     * Navigate to http://0.0.0.0:8081 and use the `MONGO_EXPRESS_...` logins in the `.env` file to login
