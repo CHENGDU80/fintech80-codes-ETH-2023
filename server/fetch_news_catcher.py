@@ -2,6 +2,7 @@ import os
 import json
 import traceback
 from dotenv import load_dotenv
+from pymongo.collection import Collection
 
 import requests
 
@@ -66,6 +67,7 @@ def get_news_nc(
     not_sources: str | None = None,
     from_datetime: str | None = None,  # "YYYY/mm/dd HH:MM:SS" in UTC
     to_datetime: str | None = None,
+    mongo_col_news: Collection | None = None,  # to save to DB each news item
 ) -> NCSearchResp | None:
     params = {
         'q': advanced_query,
@@ -131,7 +133,17 @@ def get_news_nc(
             # parent search
             nc_search_id=str(search_resp.id),
         )
-        print(news)
+        if mongo_col_news is None:
+            print(news)  # verify result
+        else:
+            mongo_col_news.insert_one(news.model_dump())
         search_resp.news_ids.append(str(news.id))
     
     return search_resp
+
+
+if __name__ == "__main__":
+    # test fetch news
+    resp: NCSearchResp | None = get_news_nc()
+    if resp:
+        print(resp)

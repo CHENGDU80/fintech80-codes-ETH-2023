@@ -24,8 +24,12 @@ from fetch_news_catcher import get_news_nc, CURATED_DATA_SOURCES
 # Mongo
 col_company = db_conn_mongo.get_collection(database_name="main", collection_name="company")
 col_event = db_conn_mongo.get_collection(database_name="main", collection_name="event")
+# bing API news
 col_bingnews = db_conn_mongo.get_collection(database_name="main", collection_name="bingnews")
 col_bingsearchresp = db_conn_mongo.get_collection(database_name="main", collection_name="bingsearchresp")
+# news catcher API news
+col_nc_news = db_conn_mongo.get_collection(database_name="main", collection_name="ncnews")
+col_nc_search_resp = db_conn_mongo.get_collection(database_name="main", collection_name="ncsearchresp")
 # redis
 rdb = db_conn_redis.get_rdb()
 
@@ -129,6 +133,7 @@ async def pull_golden_news(
         not_sources=not_sources,
         from_datetime=from_datetime,
         to_datetime=to_datetime,
+        mongo_col_news=col_nc_news,
     )
 
     if resp is None:
@@ -136,6 +141,7 @@ async def pull_golden_news(
 
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     print(resp)
+    col_nc_search_resp.insert_one(resp.model_dump())
 
     # TODO: store in DB
 
