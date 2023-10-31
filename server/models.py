@@ -78,6 +78,66 @@ class BingNews(BaseModel):
         populate_by_name = True
 
 
+class NCSearchResp(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+
+    status: str
+    total_hits: int
+    page: int
+    total_pages: int
+    page_size: int
+
+    news_ids: List[str] = Field(default_factory=list)  # NCNews
+
+    user_input: str  # json
+
+    class Config:
+        populate_by_name = True
+        json_encoders = {ObjectId: str}
+        arbitrary_types_allowed = True
+
+
+class NCNews(BaseModel):
+    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+
+    title: str
+    author: str
+    published_date: str
+    published_date_precision: str
+    link: str
+    clean_url: str
+    excerpt: str | None
+    summary: str
+    rights: str
+    rank: int  # TODO: optional?
+    topic: str
+    country: str
+    language: str
+    authors: str
+    media: str
+    is_opinion: bool
+    twitter_account: str | None
+    match_score: float  # higher better
+    api_entity_id: str
+
+    # processed output
+    summary: str = Field(default_factory=str)
+    infl_tech: float = Field(default_factory=float)
+    infl_fin: float = Field(default_factory=float)
+    infl_policy: float = Field(default_factory=float)
+
+    # reverse link to parent categories
+    # NCSearchResp
+    nc_search_id: str
+    # Event
+    event_group_id: str = Field(default_factory=str)
+
+    class Config:
+        json_encoders = {ObjectId: str}
+        arbitrary_types_allowed = True
+        populate_by_name = True
+
+
 class Event(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
 
@@ -85,12 +145,13 @@ class Event(BaseModel):
     ev_infl_fin: float
     ev_infl_policy: float
     ev_summary: str  # short, but several sentences
-    ev_summary_short: str  # one line, headline style
+    ev_summary_short: str  # one line, headline style, for gpt too
 
     create_ts: str = Field(default=datetime.datetime.now().isoformat())
     update_ts: str = Field(default=datetime.datetime.now().isoformat())
 
     bing_news_ids: List[str] = Field(default_factory=list)
+    nc_news_ids: List[str] = Field(default_factory=list)
 
     class Config:
         json_encoders = {ObjectId: str}

@@ -7,9 +7,17 @@ from llm_completion import (
     llm_construct_chat_keyword_gen,
 )
 
-from models import BingNews, BingSearchResp, Event, Company
+from models import (
+    BingNews,
+    BingSearchResp,
+    Event,
+    Company,
+    NCNews,
+    NCSearchResp,
+)
 from db_connections import db_conn_mongo, db_conn_redis
 from fetch_news_bing import get_news_bing
+from fetch_news_catcher import get_news_nc, CURATED_DATA_SOURCES
 
 
 ### DB conn ####################################################################
@@ -81,7 +89,7 @@ async def read_item(question: str | None = None):
     return {"question": question, "kws": keywords.choices[0].message}
 
 
-@app.get("/pull_golden_news", status_code=status.HTTP_200_OK)
+@app.get("/pull_news_via_bing", status_code=status.HTTP_200_OK)
 async def pull_golden_news(count: int = 2):
     resp: BingSearchResp | None = get_news_bing(count=count)
     print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
@@ -94,4 +102,44 @@ async def pull_golden_news(count: int = 2):
     return {
         "success": True,
         "bing_news_search_resp": resp.model_dump_json(),
+    }
+
+
+@app.get("/pull_news_via_nc", status_code=status.HTTP_200_OK)
+async def pull_golden_news(
+    advanced_query: str = "electric vehicle",
+    page_size: int = 5,
+    page: int = 1,  # page * page_size = total count
+    sources: str | None = None,  # if empty, use curated sources
+    lang: str = "en",
+    sort_by: str = "date",
+    not_sources: str | None = None,
+    from_datetime: str | None = None,  # "YYYY/mm/dd HH:MM:SS" in UTC
+    to_datetime: str | None = None,
+):
+    if sources is None:
+        sources = ",".join(CURATED_DATA_SOURCES)
+
+    resp: NCSearchResp | None = get_news_nc(
+        advanced_query=advanced_query,
+        page_size=page_size,
+        page=page,
+        lang=lang,
+        sort_by=sort_by,
+        not_sources=not_sources,
+        from_datetime=from_datetime,
+        to_datetime=to_datetime,
+    )
+
+    if resp is None:
+        return {"success": False}
+
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    print(resp)
+
+    # TODO: store in DB
+
+    return {
+        "success": True,
+        "nc_news_search_resp": resp.model_dump_json(),
     }

@@ -48,5 +48,37 @@ os.environ.get("ENV_VAR_KEY", default_val)
 Ask Jason
 
 
-# PORTs available on server
+# Other
+### PORTs available on server
 60-9000
+
+### Focus list
+Tesla 特斯拉 (US)
+BMW 宝马 (DE)
+Audi 奥迪 (DE)
+Ford 福特(US)
+Porsche 保时捷 (DE)
+iMiEV 三菱 (JP)
+BYD 比亚迪 (CN)
+(maybe)
+CTL 宁德时代 (CN)
+Xpeng Motor 小鹏汽车
+Nio 蔚来
+
+### Ref links
+
+#### Bing NewsSearch API
+* API general: https://learn.microsoft.com/en-us/bing/search-apis/bing-news-search/reference/response-objects#newsarticle
+* params: https://learn.microsoft.com/en-us/bing/search-apis/bing-news-search/reference/query-parameters#news-categories-by-market
+* advanced query: https://support.microsoft.com/en-us/topic/advanced-search-options-b92e25f1-0085-4271-bdf9-14aaea720930
+  * https://support.microsoft.com/en-us/topic/advanced-search-keywords-ea595928-5d63-4a0b-9c6b-0b769865e78a
+
+
+#### Alternative news sources
+* https://stockanalysis.com/stocks/
+
+
+#### OpenAI API
+* Embedding: https://platform.openai.com/docs/guides/embeddings/use-cases
+* Web QA tutorial (tokenize, embeddings, knowledge base): https://platform.openai.com/docs/tutorials/web-qa-embeddings
+* Multi-agent with LangChain: https://blog.langchain.dev/gpteam-a-multi-agent-simulation/
