@@ -318,6 +318,60 @@ async def fetch_events(
     }
 
 
+@app.get("/api/event_by_id")
+async def fetch_event_by_id(
+    event_id: str,  # DB id of the news document
+    token: str | None = None,
+):
+    if token is None or token != SIMPLE_TOKEN:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    
+    db_query = {"_id": ObjectId(event_id)}
+    print(f"DB query: {db_query}")
+    res = col_event.find_one(db_query)
+    if res is None:
+        return {"Succsss": False}
+    
+    ev = Event.model_validate(res)
+    return {
+        "success": True,
+        "summary": {
+            "number": 1,
+            "event_id": str(ev.id),
+        },
+        "object_json": ev.model_dump_json(),
+    }
+        
+
+@app.get("/api/lst_news_by_event_id")
+async def fetch_lst_news_by_event_id(
+    event_id: str,  # DB id of the news document
+    token: str | None = None,
+):
+    if token is None or token != SIMPLE_TOKEN:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    ev_res = await fetch_event_by_id(event_id=event_id, token=token)
+    if ev_res["success"] is False:
+        return {"success": False}
+
+    ev = Event.model_validate_json(ev_res["object_json"])
+    dct_news = {}
+    for nid in ev.core_news_ids:
+        res = await fetch_news_by_id(news_id=nid, token=token)
+        if res["success"]:
+            news = NCNews.model_validate_json(res["object_json"])
+            dct_news[str(news.id)] = news.model_dump_json()
+    return {
+        "success": True,
+        "summary": {
+            "number": len(dct_news),
+            "news_ids": list(dct_news.keys()),
+        },
+        "object_json": list(dct_news.values()),
+    }
+
+
 @app.get("/api/news_by_id")
 async def fetch_news_by_id(
     news_id: str,  # DB id of the news document
