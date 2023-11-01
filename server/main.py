@@ -2,6 +2,8 @@ from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import HTTPException
 
+from datetime import datetime, timedelta
+
 # local import
 from llm_completion import (
     llm_complete_chat,
@@ -19,6 +21,11 @@ from models import (
 from db_connections import db_conn_mongo, db_conn_redis
 from fetch_news_bing import get_news_bing
 from fetch_news_catcher import get_news_nc, CURATED_DATA_SOURCES
+from news_group_and_proc import (
+    create_batch_articles_embedding,
+    cluster_on_embeddings,
+    cluster_get_main_and_multi_angle,
+)
 
 
 ### DB conn ####################################################################
@@ -131,14 +138,55 @@ async def proc_news(
     print(f"DB query: {db_query}")
     results = col_nc_news.find(db_query)
 
-    lst_nc_news = []
+    dct_nc_news = {}
     for doc in results:
         nc_news = NCNews.model_validate(doc)
-        lst_nc_news.append(nc_news)
+        dct_nc_news[str(nc_news.id)] = nc_news
 
-    for nc_news in lst_nc_news:
+    for nc_news in dct_nc_news:
         print(nc_news.query_str, nc_news.published_date)
-    return {"n_records_found": len(lst_nc_news)}
+
+    # --- search DB for previous events on same query_str and prev date
+    curr_day = datetime.strptime(date, '%Y-%m-%d')
+    prev_day = curr_day - timedelta(days=1)
+    prev_day_str = prev_day.strftime('%Y-%m-%d')
+
+    db_query_prev_evs = {
+        "for_date": {"$regex": f"^{date.strip()}"},
+        "company_ids": query.strip(),
+    }
+
+    lst_prev_events = []
+    res_prev_evs = col_event.find(db_query_prev_evs)
+    for doc in res_prev_evs:
+        ev = Event.model_validate(doc)
+        lst_prev_events.append(ev)
+
+    return {"n_records_found": len(dct_nc_news), "prev_evs": lst_prev_events}
+    
+    # --- process to get events
+    df = create_batch_articles_embedding(lst_nc_news=dct_nc_news.values())
+    labels, cluster_centroids, df_unique = cluster_on_embeddings(df=df)
+    print("cluster_centroids" + "-" * 80)
+    print(cluster_centroids)
+
+    print("df_unique.head" + "-" * 80)
+    print(df_unique.head())
+
+    print("labels" + "-" * 80)
+    print(labels)
+    print()
+
+    selection, events = cluster_get_main_and_multi_angle(
+        df_unique_labeled=df_unique,
+        labels_set=set(labels.tolist()),
+    )
+    print("Article selection" + "-" * 80)
+    print(selection)
+
+    # create events
+
+    return {"n_records_found": len(dct_nc_news)}
 
 
 @app.get("/pull_news_via_nc", status_code=status.HTTP_200_OK)

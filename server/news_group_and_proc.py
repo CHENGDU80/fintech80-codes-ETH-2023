@@ -230,7 +230,6 @@ def cluster_get_main_and_multi_angle(
             print(f"Selected record <{record_id}>. Title: {single_label_df[single_label_df['record_id'] == record_id]['title'].iloc[0]}")
 
             selection[label].append(record_id)
-        
 
         # summarize with GPT
         user_content = []
@@ -277,7 +276,7 @@ def cluster_get_main_and_multi_angle(
 
         print("\n\n")
     
-    return selection, []
+    return selection, events
 
 
 def _main():
@@ -325,12 +324,13 @@ def _main():
 
     print("\n\n")
 
-    selection = cluster_get_main_and_multi_angle(
+    selection, events = cluster_get_main_and_multi_angle(
         df_unique_labeled=df_unique,
         labels_set=set(labels.tolist()),
     )
     print("Article selection" + "-" * 80)
     print(selection)
+    print(events)
 
 
 if __name__ == "__main__":
