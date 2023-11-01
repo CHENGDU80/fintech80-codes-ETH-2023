@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from llm_completion import (
     llm_complete_chat,
     llm_construct_chat_keyword_gen,
+    llm_gen_category_and_sentiment_score,
 )
 
 from models import (
@@ -111,16 +112,14 @@ async def plotly_sample_data():
     return {"traces": traces, "layout": layout}
 
 
-@app.get("/ask")
-async def ask_keyword_gen(question: str | None = None):
-    print("Got question:", question)
+@app.get("/analyze_article")
+async def summarize_article(question: str | None = None):
     # return {"question": question}  # test simple bounce back
-    keywords = llm_complete_chat(
-        messages=llm_construct_chat_keyword_gen(user_content=question),
-        model="gpt-3.5-turbo",
+    result = llm_complete_chat(
+        messages=llm_gen_category_and_sentiment_score(user_content=question),
+        model="gpt-3.5-turbo-16k",
     )
-    print("Gen keywords:", keywords)
-    return {"question": question, "kws": keywords.choices[0].message}
+    return {"Input": question, "Analysis": result.choices[0].message}
 
 
 @app.get("/pull_news_via_bing", status_code=status.HTTP_200_OK)
