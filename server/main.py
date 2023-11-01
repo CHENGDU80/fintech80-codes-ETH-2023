@@ -162,8 +162,6 @@ async def proc_news(
         ev = Event.model_validate(doc)
         lst_prev_events.append(ev)
 
-    return {"n_records_found": len(dct_nc_news), "prev_evs": lst_prev_events}
-    
     # --- process to get events
     df = create_batch_articles_embedding(lst_nc_news=dct_nc_news.values())
     labels, cluster_centroids, df_unique = cluster_on_embeddings(df=df)
@@ -186,7 +184,7 @@ async def proc_news(
 
     # create events
 
-    return {"n_records_found": len(dct_nc_news)}
+    return {"n_records_found": len(dct_nc_news), "prev_evs": lst_prev_events}
 
 
 @app.get("/pull_news_via_nc", status_code=status.HTTP_200_OK)
