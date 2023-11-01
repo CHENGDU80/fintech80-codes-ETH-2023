@@ -1,6 +1,7 @@
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import HTTPException
+from bson.objectid import ObjectId
 
 from datetime import datetime, timedelta
 
@@ -83,8 +84,8 @@ async def test_conn():
         },
     }
 
-@app.get("/getfakedata")
-async def get_fake_data():
+@app.get("/sample_plot_data")
+async def plotly_sample_data():
     layout = {
         "title": "Plot on [xxx]",
         "xaxis": {"title": "Time"},
@@ -111,7 +112,7 @@ async def get_fake_data():
 
 
 @app.get("/ask")
-async def read_item(question: str | None = None):
+async def ask_keyword_gen(question: str | None = None):
     print("Got question:", question)
     # return {"question": question}  # test simple bounce back
     keywords = llm_complete_chat(
@@ -213,7 +214,7 @@ async def proc_news(
             for_date=date,
             ev_description=ev["description"],
             ev_summary_short=ev["summary"],
-            previous_event_id=ev["prev_ev_record_id"],
+            previous_event_id=str(ev["prev_ev_record_id"]),
             core_news_ids=selection[ev["label"]],
             # propagate later
             ev_infl_tech=0.0,
@@ -283,7 +284,7 @@ async def pull_golden_news(
 
 # --- for passing data to front end
 @app.get("/api/events")
-async def proc_news(
+async def fetch_events(
     target_entity: str,  # e.g. company name
     date_start: str,
     date_end: str,
@@ -314,4 +315,31 @@ async def proc_news(
             "event_ids": list(dct_evs.keys()),
         },
         "event_object_jsons": res,
+    }
+
+
+@app.get("/api/news_by_id")
+async def fetch_news_by_id(
+    news_id: str,  # DB id of the news document
+    token: str | None = None,
+):
+    if token is None or token != SIMPLE_TOKEN:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    db_query = {"_id": ObjectId(news_id)}
+
+    print(f"DB query: {db_query}")
+    res = col_nc_news.find_one(db_query)
+
+    if res is None:
+        return {"success": False}
+
+    news = NCNews.model_validate(res)
+    return {
+        "success": True,
+        "summary": {
+            "number": 1,
+            "event_id": str(news.id),
+        },
+        "object_json": news.model_dump_json(),
     }
