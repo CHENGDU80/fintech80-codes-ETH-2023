@@ -190,7 +190,7 @@ async def proc_news(
             ev_description=ev["description"],
             ev_summary_short=ev["summary"],
             previous_event_id=ev["prev_ev_record_id"],
-            core_news_ids=[selection[ev["label"]]],
+            core_news_ids=selection[ev["label"]],
             # propagate later
             ev_infl_tech=0.0,
             ev_infl_fin=0.0,
