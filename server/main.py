@@ -143,7 +143,7 @@ async def proc_news(
         nc_news = NCNews.model_validate(doc)
         dct_nc_news[str(nc_news.id)] = nc_news
 
-    for nc_news in dct_nc_news:
+    for nc_news in dct_nc_news.values():
         print(nc_news.query_str, nc_news.published_date)
 
     # --- search DB for previous events on same query_str and prev date
