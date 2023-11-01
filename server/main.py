@@ -66,6 +66,22 @@ app.add_middleware(
 @app.get("/")
 async def test_conn():
     return {"ping": "pong"}
+    # Dummy data test
+    dct = {"1": 1, "2": 2, "3": 3}
+    lst1 = [1,2,3]
+    events = ['a', 'b']
+    lst2 = ['x', 'y']
+    return {
+        "records_found": {
+            "num": len(dct),
+            "ids": list(dct.keys()),
+        },
+        "prev_evs": len(lst1),
+        "events_inserted": {
+            "num": len(events),
+            "ids": lst2,
+        },
+    }
 
 @app.get("/getfakedata")
 async def get_fake_data():
@@ -213,7 +229,7 @@ async def proc_news(
     return {
         "records_found": {
             "num": len(dct_nc_news),
-            "ids": dct_nc_news.keys(),
+            "ids": list(dct_nc_news.keys()),
         },
         "prev_evs": len(lst_prev_events),
         "events_inserted": {
@@ -262,4 +278,40 @@ async def pull_golden_news(
     return {
         "success": True,
         "nc_news_search_resp": resp.model_dump_json(),
+    }
+
+
+# --- for passing data to front end
+@app.get("/api/events")
+async def proc_news(
+    target_entity: str,  # e.g. company name
+    date_start: str,
+    date_end: str,
+    token: str | None = None,
+):
+    if token is None or token != SIMPLE_TOKEN:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    db_query = {
+        "for_date": {"$gte": date_start, "$lte": date_end},
+        "company_ids": target_entity,
+    }
+
+    print(f"DB query: {db_query}")
+    results = col_event.find(db_query)
+
+    dct_evs = {}
+    for doc in results:
+        ev = Event.model_validate(doc)
+        dct_evs[str(ev.id)] = ev
+
+    res = [ev.model_dump_json() for ev in dct_evs.values()]
+
+    return {
+        "success": True,
+        "summary": {
+            "number": len(dct_evs),
+            "event_ids": list(dct_evs.keys()),
+        },
+        "event_object_jsons": res,
     }
