@@ -213,9 +213,9 @@ async def proc_news(
     return {
         "records_found": {
             "num": len(dct_nc_news),
-            "ids": dct_nc_news.values(),
+            "ids": dct_nc_news.keys(),
         },
-        "prev_evs": lst_prev_events,
+        "prev_evs": len(lst_prev_events),
         "events_inserted": {
             "num": len(events),
             "ids": lst_ev_ids,
