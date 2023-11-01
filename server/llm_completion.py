@@ -82,7 +82,7 @@ def llm_summarize_event_with_prev(
 # anaylisys
 def llm_gen_category_and_sentiment_score(
     user_content: str,
-    aspects: [str] = ["policy", "cash flow", "interest rate", "tech innovation"],
+    aspects: [str] = ["policy", "company finance", "tech innovation"],
     system_content: str = (
         "You are a finance assistant, skilled in categorizing a news into given aspects and analyzing the sentiment in each aspect."
         "Respond with a json object only, with aspects strings as keys and sentiment scores as values (-100 to 0 as bad view, 0 - 100 as good view)."

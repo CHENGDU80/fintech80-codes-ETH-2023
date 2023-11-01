@@ -184,7 +184,7 @@ async def proc_news(
 
     # create events
     lst_ev_ids = []
-    for ev in enumerate(events):
+    for ev in events:
         event = Event(
             for_date=date,
             ev_description=ev["description"],
