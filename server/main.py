@@ -152,7 +152,7 @@ async def proc_news(
     prev_day_str = prev_day.strftime('%Y-%m-%d')
 
     db_query_prev_evs = {
-        "for_date": {"$regex": f"^{date.strip()}"},
+        "for_date": {"$regex": f"^{prev_day_str.strip()}"},
         "company_ids": query.strip(),
     }
 
