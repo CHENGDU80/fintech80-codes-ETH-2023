@@ -397,3 +397,128 @@ async def fetch_news_by_id(
         },
         "object_json": news.model_dump_json(),
     }
+
+
+@app.get("/api/company_data")
+async def update_company_data(
+    target_entity: str,  # e.g. company/topic name,
+    token: str | None = None,
+):
+    if token is None or token != SIMPLE_TOKEN:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    # see if there is one, if not, create and follow the update procedure
+    company_query = {"company_name": target_entity}
+    if not col_company.find_one(company_query):
+        company = Company(
+            company_name=target_entity,
+            primary_industry="EV",
+            score_tech=0.0,
+            score_fin=0.0,
+            score_policy=0.0,
+            c0=0.0,
+            c_tech=0.33,
+            c_fin=0.33,
+            c_policy=0.33,
+            score_combined=0.0,
+        )
+        col_company.insert_one(company.model_dump())
+    
+    company = Company.model_validate(col_company.find_one(company_query))
+
+    # fetch related events and update score
+    res = await fetch_events(
+        target_entity=target_entity,
+        # all events
+        date_start="2022-01-01",
+        date_end="2024-10-10",
+        token=token,
+    )
+
+    ev_ids = res["summary"]["event_ids"]
+    lst_company_events = []
+    for eid in ev_ids:
+        res = await fetch_event_by_id(event_id=eid, token=token)
+        if res["success"]:
+            lst_company_events.append(Event.model_validate_json(res["object_json"]))
+
+    sorted_lst_events: list[Event] = sorted(lst_company_events, key=lambda ev: ev.for_date)
+    for ev in sorted_lst_events:
+        if str(ev.id) not in company.event_ids:
+            # add the new event id and respective score
+            company.event_ids.append(str(ev.id))
+            company.score_tech += ev.ev_infl_tech
+            company.score_fin += ev.ev_infl_fin
+            company.score_policy += ev.ev_infl_policy
+            company.lst_score_tech.append(company.score_tech)
+            company.lst_score_fin.append(company.score_fin)
+            company.lst_score_policy.append(company.score_policy)
+    
+    def calc_company_score(comp: Company, s_t, s_f, s_p):
+        return comp.c0 + comp.c_tech * s_t + comp.c_fin * s_f + comp.c_policy * s_p
+
+    company.score_combined = calc_company_score(
+        comp=company,
+        s_t=company.score_tech,
+        s_f=company.score_fin,
+        s_p=company.score_policy,
+    )
+
+    # update score
+    col_company.update_one(
+        company_query,
+        {
+            "$set": {
+                "score_tech": company.score_tech,
+                "score_fin": company.score_fin,
+                "score_policy": company.score_policy,
+                "event_ids": company.event_ids,
+                "lst_score_tech": company.lst_score_tech,
+                "lst_score_fin": company.lst_score_fin,
+                "lst_score_policy": company.lst_score_policy,
+                "score_combined": company.score_combined,
+            }
+        }
+    )
+
+    # retrieve one more time for return
+    ret = Company.model_validate(
+        col_company.find_one(company_query),
+    )
+    # compute extra list of total score changes
+    hist_score_combined = []
+    for idx, ev in enumerate(sorted_lst_events):
+        s_t = company.lst_score_tech[idx]
+        s_f = company.lst_score_fin[idx]
+        s_p = company.lst_score_policy[idx]
+        hist_score_combined.append((ev.for_date, calc_company_score(ret, s_t, s_f, s_p)))
+
+    # handle duplicate date
+    date_count = {}
+    new_lst = []
+
+    for t in hist_score_combined:
+        date, value = t
+        dt = datetime.strptime(date, "%Y-%m-%d")
+        
+        # Check for duplicates and increment counter
+        if date in date_count:
+            date_count[date] += 1
+            dt += timedelta(seconds=date_count[date])  # Add minor time diff (in seconds)
+        else:
+            date_count[date] = 0
+        
+        # Convert datetime back to string and append to new list
+        new_date = dt.strftime("%Y-%m-%d %H:%M:%S")
+        new_lst.append((new_date, value))
+
+    return {
+        "success": True,
+        "summary": {
+            "number": 1,
+            "company_id": str(ret.id),
+        },
+        "hist_score_combined_by_date": new_lst,
+        "object_json": ret.model_dump_json(),
+    }
+    
