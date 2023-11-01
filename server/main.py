@@ -161,6 +161,7 @@ async def proc_news(
     for doc in res_prev_evs:
         ev = Event.model_validate(doc)
         lst_prev_events.append(ev)
+        print(f"Prev event ID: {str(ev.id)}")
 
     # --- process to get events
     df = create_batch_articles_embedding(lst_nc_news=dct_nc_news.values())
@@ -175,10 +176,17 @@ async def proc_news(
     print(labels)
     print()
 
-    selection, events = cluster_get_main_and_multi_angle(
-        df_unique_labeled=df_unique,
-        labels_set=set(labels.tolist()),
-    )
+    if len(lst_prev_events) >0:
+        selection, events = cluster_get_main_and_multi_angle(
+            df_unique_labeled=df_unique,
+            labels_set=set(labels.tolist()),
+            prev_events=lst_prev_events,
+        )
+    else:
+        selection, events = cluster_get_main_and_multi_angle(
+            df_unique_labeled=df_unique,
+            labels_set=set(labels.tolist()),
+        )
     print("Article selection" + "-" * 80)
     print(selection)
 
