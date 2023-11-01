@@ -62,7 +62,7 @@ def llm_summarize_event_with_prev(
     prev_events: list[str],
     system_content: str = (
         "You are a finance assistant, skilled in combining news and find what's in common (identify key event)."
-        "Given a list of 4 strings describing previous events, and 3 new articles, try to match if the 3 new news articles all belong to the same event."
+        "Given a list of strings describing previous events, and 3 new articles, try to match if the 3 new news articles all belong to the same event."
         "If so, return json object, with key 'matched' to the list index of the prev_event (starting 0), and the following:"
         "key 'event_summary' with a short sentence (no more than 20 words) which would be very similar to the previous event, but includes the new article changes."
         "and key 'event_description' with a slightly longer exerpt introducing the event and giving an explanation how the news are considered the same event (less than 80 words)."

@@ -183,8 +183,36 @@ async def proc_news(
     print(selection)
 
     # create events
+    lst_ev_ids = []
+    for ev in enumerate(events):
+        event = Event(
+            for_date=date,
+            ev_description=ev["description"],
+            ev_summary_short=ev["summary"],
+            previous_event_id=ev["prev_ev_record_id"],
+            core_news_ids=[selection[ev["label"]]],
+            # propagate later
+            ev_infl_tech=0.0,
+            ev_infl_fin=0.0,
+            ev_infl_policy=0.0,
+            ev_infl_combined=0.0,
+            company_ids=[query],
+            company_relevances=[1.0],
+        )
+        col_event.insert_one(event.model_dump())
+        lst_ev_ids.append(str(event.id))
 
-    return {"n_records_found": len(dct_nc_news), "prev_evs": lst_prev_events}
+    return {
+        "records_found": {
+            "num": len(dct_nc_news),
+            "ids": dct_nc_news.values(),
+        },
+        "prev_evs": lst_prev_events,
+        "events_inserted": {
+            "num": len(events),
+            "ids": lst_ev_ids,
+        },
+    }
 
 
 @app.get("/pull_news_via_nc", status_code=status.HTTP_200_OK)
