@@ -319,6 +319,8 @@ async def fetch_events(
         ev_infl_fin = sum([n.infl_fin for n in lst_news]) / num_news
         ev_infl_policy = sum([n.infl_policy for n in lst_news]) / num_news
 
+        ev_infl_combined = ev_infl_tech + ev_infl_fin + ev_infl_policy
+
         col_event.update_one(
             {"_id": ev.id},
             {
@@ -326,6 +328,7 @@ async def fetch_events(
                     "ev_infl_tech": ev_infl_tech,
                     "ev_infl_fin": ev_infl_fin,
                     "ev_infl_policy": ev_infl_policy,
+                    "ev_infl_combined": ev_infl_combined,
                 }
             }
         )
