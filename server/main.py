@@ -308,6 +308,38 @@ async def fetch_events(
 
     res = [ev.model_dump_json() for ev in dct_evs.values()]
 
+    # update scores of all events based on related core_news
+    for eid, ev in dct_evs.items():
+        res_lst_news = await fetch_lst_news_by_event_id(event_id=eid, token=token)
+        lst_news_jsons = res_lst_news["object_json"]
+        lst_news = [NCNews.model_validate_json(tmp) for tmp in lst_news_jsons]
+        num_news = float(len(lst_news))
+        # calculate avg scores and write to the event
+        ev_infl_tech = sum([n.infl_tech for n in lst_news]) / num_news
+        ev_infl_fin = sum([n.infl_fin for n in lst_news]) / num_news
+        ev_infl_policy = sum([n.infl_policy for n in lst_news]) / num_news
+
+        col_event.update_one(
+            {"_id": ev.id},
+            {
+                "$set": {
+                    "ev_infl_tech": ev_infl_tech,
+                    "ev_infl_fin": ev_infl_fin,
+                    "ev_infl_policy": ev_infl_policy,
+                }
+            }
+        )
+
+    # query again for updated data
+    results = col_event.find(db_query)
+
+    dct_evs = {}
+    for doc in results:
+        ev = Event.model_validate(doc)
+        dct_evs[str(ev.id)] = ev
+
+    res = [ev.model_dump_json() for ev in dct_evs.values()]
+
     return {
         "success": True,
         "summary": {
@@ -441,19 +473,31 @@ async def update_company_data(
         res = await fetch_event_by_id(event_id=eid, token=token)
         if res["success"]:
             lst_company_events.append(Event.model_validate_json(res["object_json"]))
+    
+    # just clear all event entries
+    company.score_tech = 0.0
+    company.score_fin = 0.0
+    company.score_policy = 0.0
+    company.event_ids = []
+    company.lst_score_tech = []
+    company.lst_score_fin = []
+    company.lst_score_policy = []
+    company.score_combined = 0.0
 
     sorted_lst_events: list[Event] = sorted(lst_company_events, key=lambda ev: ev.for_date)
     for ev in sorted_lst_events:
-        if str(ev.id) not in company.event_ids:
-            # add the new event id and respective score
-            company.event_ids.append(str(ev.id))
-            company.score_tech += ev.ev_infl_tech
-            company.score_fin += ev.ev_infl_fin
-            company.score_policy += ev.ev_infl_policy
-            company.lst_score_tech.append(company.score_tech)
-            company.lst_score_fin.append(company.score_fin)
-            company.lst_score_policy.append(company.score_policy)
-    
+        # if str(ev.id) not in company.event_ids:
+        # add the new event id and respective score
+        company.event_ids.append(str(ev.id))
+        company.score_tech += ev.ev_infl_tech
+        company.score_fin += ev.ev_infl_fin
+        company.score_policy += ev.ev_infl_policy
+        company.lst_score_tech.append(company.score_tech)
+        company.lst_score_fin.append(company.score_fin)
+        company.lst_score_policy.append(company.score_policy)
+
+    # print(company.lst_score_fin)
+
     def calc_company_score(comp: Company, s_t, s_f, s_p):
         return comp.c0 + comp.c_tech * s_t + comp.c_fin * s_f + comp.c_policy * s_p
 
@@ -491,7 +535,9 @@ async def update_company_data(
         s_t = company.lst_score_tech[idx]
         s_f = company.lst_score_fin[idx]
         s_p = company.lst_score_policy[idx]
-        hist_score_combined.append((ev.for_date, calc_company_score(ret, s_t, s_f, s_p)))
+        sc = calc_company_score(ret, s_t, s_f, s_p)
+        # print(ev.id, sc)
+        hist_score_combined.append((ev.for_date, sc))
 
     # handle duplicate date
     date_count = {}
@@ -521,4 +567,3 @@ async def update_company_data(
         "hist_score_combined_by_date": new_lst,
         "object_json": ret.model_dump_json(),
     }
-    

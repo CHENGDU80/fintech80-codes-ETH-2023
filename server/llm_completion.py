@@ -102,8 +102,6 @@ def llm_gen_category_and_sentiment_score(
     ]
 
 
-
-
 # import openai
 
 # openai.api_key = "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"
